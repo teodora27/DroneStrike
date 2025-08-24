@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="stylesheet" href="/home.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="profile">
+      <p>Bună, {{name}}</p>
+      <p>{{email}}</p>
+      <a href="/logout" class="logout-link">Delogare</a>
+    </div>
+  </header>
+
+  <main class="layout">
+  <section class="left-pane">
+    <h2>Camera Web</h2>
+    {{!-- <video id="webcam" width="640" height="480" autoplay></video> --}}
+    <img src="http://localhost:5001/video_feed" width="640" height="480" />
+
+  </section>
+
+  <section class="drone-control-section">
+    <h3>Controlul dronei</h3>
+    
+    <div class="drone-controls">
+      <button id="move-up"    class="arrow-button up">▲</button>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <button id="move-left"  class="arrow-button left">◀</button>
+      <div class="center-logo">⦿</div>
+      <button id="move-right" class="arrow-button right">▶</button>
+
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <button id="move-down"  class="arrow-button down">▼</button>
+    </div>
+    <div class="drone-buttons">
+      <button id="start-drone">Porneste drona</button>
+      <button id="fly-drone">Pilotează drona</button>
+      <button id="stop-drone">Oprește drona</button>
+    </div>
+  </section>
+
+  <section class="target-section">
+    <h3>Setează target dronă</h3>
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+      <input type="file" name="image" accept="image/*" />
+      <button type="submit">Încarcă poza</button>
+    </form>
+
+    <h3>Target dronă</h3>
+    <div class="target-wrapper">
+      <img src="/images/standard-target.png"
+           alt="Target standard"
+           class="target-base" />
+
+      {{#if imagePath}}
+        <img src="{{imagePath}}"
+             alt="Target personalizat"
+             class="target-upload" />
+      {{/if}}
+    </div>
+  </section>
+</main>
+
+
+  <script>
+     document.getElementById("start-drone").addEventListener("click", async () => {
+    try {
+      const res = await fetch('/start-drone', { method: 'POST' });
+      const text = await res.text();
+      console.log(text);
+      alert("Script pornit cu succes!");
+    } catch (err) {
+      console.error("Eroare la pornirea dronei:", err);
+      alert("A apărut o eroare.");
+    }
+  });
+    (async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        document.getElementById('webcam').srcObject = stream;
+      } catch (err) {
+        console.error('Nu am putut accesa camera:', err);
+      }
+    })();
+  </script>
+</body>
+</html>

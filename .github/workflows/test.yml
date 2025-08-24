@@ -1,0 +1,70 @@
+name: DroneStrike Pipeline Tests
+
+on:
+  push:
+    branches:
+      - main                # Main branch
+      - automated-testing   # Custom branch
+      - AutomatedTestsEdi   # Custom branch
+      - TestsTeo
+  pull_request:
+    branches:
+      - main               # Main branch
+      - automated-testing   # Custom branch
+
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10.17
+
+    # Step 3: Cache pip dependencies
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    # Step 4: Install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Step 5: Download test data (if hosted externally)
+    - name: Download test data
+      run: |
+        mkdir -p test_data/images test_data/videos
+        # Example: Download from an external source
+        # wget -O test_data/images/sample.jpg <URL>
+        # wget -O test_data/videos/sample.mp4 <URL>
+
+    # Step 5: Create output directories
+    - name: Create output directories
+      run: |
+        mkdir -p output/images output/videos output/depth_images
+
+    # Step 6: Run tests
+    - name: Run tests
+      run: python test_pipeline.py
+
+    # Step 7: Upload processed outputs
+    - name: Upload processed outputs
+      uses: actions/upload-artifact@v4
+      with:
+        name: processed-outputs
+        path: |
+          output/images/output_*
+          output/videos/output_*

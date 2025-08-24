@@ -1,0 +1,29 @@
+# Ignore the virtual environment
+venv/
+.venv
+
+# Ignore output file
+output/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+WebApplication/node_modules/
+WebApplication/uploads/
+
+yolov8n.pt
+# Ignore model files

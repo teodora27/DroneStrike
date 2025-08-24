@@ -1,0 +1,2 @@
+to run the web app -> nodemon src/index.js
+to run the tests -> npm tests

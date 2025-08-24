@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+  min-height: 100vh;
+  line-height: 1.4;
+}
+
+.site-header {
+  width: 100%;
+  padding: 6px 16px;
+  background: linear-gradient(90deg, #1e90ff 0%, #00bfff 100%);
+  border-bottom: 1px solid #c0d4e0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.profile {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.profile p:first-child {
+  font-weight: 600;
+}
+
+.logout-link {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 32px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.left-pane {
+  flex: 2;
+}
+
+#webcam {
+  width: 100%;
+  max-width: 640px;
+  border: 4px solid #1e90ff;
+  border-radius: 8px;
+  background: #000;
+}
+
+.drone-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 56px);
+  grid-template-rows: repeat(3, 56px);
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow-button {
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+  color: #fff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.arrow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+.arrow-button:active {
+  transform: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.up    { grid-area: 1 / 2; }
+.left  { grid-area: 2 / 1; }
+.right { grid-area: 2 / 3; }
+.down  { grid-area: 3 / 2; }
+
+.center-logo,
+.spacer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drone-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.drone-buttons button {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.drone-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+.drone-buttons button:active {
+  transform: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.target-section,
+.drone-control-section {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.drone-control-section h3,
+.target-section h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.upload-form button {
+  padding: 8px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  background: #1e90ff;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.upload-form button:hover {
+  background: #156fd0;
+}
+
+.target-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.target-base {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.target-upload {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+  }
+}

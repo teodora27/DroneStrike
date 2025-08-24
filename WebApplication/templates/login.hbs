@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="/login.css">
+</head>
+<body>
+  <main>
+    <h1>Log in</h1>
+
+    {{#if errorMessage}}
+      <div class="error-message">{{errorMessage}}</div>
+    {{/if}}
+
+    <form action="/login" method="post">
+
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit">
+
+    </form>
+
+    <p>Nu ai cont? <a href="/signup">Înregistrează-te aici</a>.</p>
+  </main>
+</body>
+</html>
